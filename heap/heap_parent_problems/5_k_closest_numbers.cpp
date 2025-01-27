@@ -8,20 +8,20 @@ void printv(vector<int>& v) {
 }
 
 /**
- * Find k closest numbers to given number:
+ * Find k closest numbers to given X:
  * Find k closest numbers to 7 in below example
  */
 
-vector<int> k_closest_numbers(vector<int>& v, int number, int k) {
+vector<int> k_closest_numbers(vector<int>& v, int X, int k) {
 	const int n = (int) v.size();
-	priority_queue<pair<int,int>> q; // max-Heap
+	priority_queue<pair<int, int>> q; // max-Heap
 	/**
 	 * Why maxHeap?
 	 * 
-	 * here we want to find K closest elements to given number
-	 * So, we do that getting diff with that number. 
+	 * here we want to find K closest elements to given X
+	 * So, we do that getting diff with that X. 
 	 * 
-	 * [5, 6, 7, 8, 9], number = 7
+	 * [5, 6, 7, 8, 9], X = 7
 	 * diff = [2, 1, 0, 1, 2]
 	 * 
 	 * now we want to remove high diff elements, so we want to put
@@ -30,14 +30,18 @@ vector<int> k_closest_numbers(vector<int>& v, int number, int k) {
 	 * NOTE: 
 	 * priority_queue<pair<int,int>> q;
 	 * this data structure prioritize p.first element for sorting (putting it on top)
-	 * we store number (element itself) in p.second so that we can retrieve when needed
+	 * we store X (element itself) in p.second so that we can retrieve when needed
 	 * 
 	 */
 
 	for(int i = 0; i < n; ++i) {
-		int diff = abs(v[i] - number);
-		auto p = make_pair(diff, v[i]); 
-		q.push(p);
+		int diff = abs(v[i] - X);
+
+		if(diff > 0) {
+			auto p = make_pair(diff, v[i]); 
+			q.push(p);
+		}
+
 		if(q.size() > k) {
 			q.pop();
 		}
@@ -53,13 +57,46 @@ vector<int> k_closest_numbers(vector<int>& v, int number, int k) {
 	return result;
 }
 
+vector<int> kFarthestNumbers(vector<int>& v, int X, int k = 3) {
+	// I want to keep numbers with more different & pop() closest numbers -> we require minH
+	using pi = pair<int, int>;
+	priority_queue<pi, vector<pi>, greater<pi>> minH;
+
+	for(auto& number: v) {
+		int diff = abs(number - X);
+
+		if(diff > 0) {
+			minH.push({diff, number});
+		}
+
+
+		if(minH.size() > k) {
+			minH.pop();
+		}
+	}
+
+	vector<int> result;
+	while(!minH.empty()) {
+
+		result.push_back(minH.top().second);
+		minH.pop();
+	}
+
+	return result;
+}
+
 int main() {
 	vector<int> v{5, 6, 7, 8, 9};
-	int k = 3;
-	int x = 7;
+	int k = 2;
+	int x = 6;
 	
-	vector<int> result = k_closest_numbers(v, x, k);
-	printv(result);
+	vector<int> closestNumbers = k_closest_numbers(v, x, k);
+	cout << "k clostest numbers: "; 
+	printv(closestNumbers);
+
+	vector<int> farthestNumbers = kFarthestNumbers(v, x, k);
+	cout << "k farthest numbers: "; 
+	printv(farthestNumbers);
 
 	return 0;
 }

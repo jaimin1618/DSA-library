@@ -21,7 +21,7 @@ using namespace std;
 
 int kth_largest(vector<int>& v, int k) {
 	// largest => minH;
-	priority_queue<int> minH;
+	priority_queue<int, vector<int>, greater<int>> minH;
 
 	for(auto& el: v) {
 		minH.push(el);
@@ -37,8 +37,14 @@ int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 
-	// default is maxHeap
+	// default is max-heap
+
+	// max-heap implementation
+	// Or priority_queue<int, vector<int>, less<int>> maxHeap;
 	priority_queue<int> maxHeap;
+
+
+	// min-heap implementation
 	priority_queue<int, vector<int>, greater<int>> minHeap;
 
 	// when need to store priority and value both using pair<int,int>

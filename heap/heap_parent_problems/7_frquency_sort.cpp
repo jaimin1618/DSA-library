@@ -34,11 +34,12 @@ void frequencySort(vector<int>& v) {
 	vector<int> sol;
 	while(!maxH.empty()) {
 		const pi& p = maxH.top();
-		auto [f, el] = p;	
+		int frequency = p.first;
+		int el = p.second;
 			
-		while(f > 0) {
+		while(frequency > 0) {
 			sol.push_back(el);
-			--f;
+			--frequency;
 		}
 
 		maxH.pop();
@@ -70,7 +71,9 @@ vector<int> frequencySortWithCompare(vector<int>& v) {
 	// make priority queue of frq => element, with priority = Compare function
 	priority_queue<pi, vector<pi>, Compare> pq;
 
-	for(auto& [v, f]: mp) {
+	for(auto& frequencyValuePair: mp) {
+		int f = frequencyValuePair.second;
+		int v = frequencyValuePair.first;
 		const pi& p = make_pair(f, v);
 		pq.push(p);
 	}
@@ -78,7 +81,8 @@ vector<int> frequencySortWithCompare(vector<int>& v) {
 	vector<int> result;
 	while(!pq.empty()) {
 		pi p = pq.top();
-		auto [f, v] = p;
+		int f = p.first;
+		int v = p.second;
 
 		while(f) {
 			result.push_back(v);

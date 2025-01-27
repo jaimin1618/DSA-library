@@ -22,7 +22,7 @@ int kth_smallest(int v[], int n, int k) {
 
 int kth_largest(int v[], int n, int k) {
 	// kth "largrest" => "min" heap
-	priority_queue<int,vector<int>,greater<int>> minH;
+	priority_queue<int, vector<int>, greater<int>> minH;
 
 	for(int j = 0; j < n; ++j) {
 		minH.push(v[j]);

@@ -45,9 +45,9 @@ double rainWaterTrapping(vector<int>& v) {
 
 	// in fact, no need to store in water[i], just do area += min(mxL, mxR) - v[i]
 	for(int i = 0; i < n; ++i) {
-		water[i] = min(mxL[i], mxR[i]) - v[i];
+		water[i] = - v[i];
 		area += water[i];
-	}
+	} min(mxL[i], mxR[i])
 
 	return area;
 }
