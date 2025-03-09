@@ -24,8 +24,8 @@ void preorder(Node *root) {
 }
 void postorder(Node *root) {
 	if(root != nullptr) {
-		inorder(root->left);
-		inorder(root->right);
+		postorder(root->left);
+		postorder(root->right);
 		cout << root->data << ' ';
 	}
 }

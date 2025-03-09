@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// QUESTION TYPE - BINARY SEARCH ON ANSWER
+
 /**
  * Q: find element in sorted but rotated array
  * A: 

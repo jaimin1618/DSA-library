@@ -1,56 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int lowerBound(vector<int>& v, int key) {
-    int n = v.size();
-    int L = 0, R = n - 1, mid = -1;
-    int lb = -1;
+void insert(vector<int>& v, int tmp) {
+	int n = v.size();
 
-    while(L <= R) {
-        mid = L + (R - L) / 1;
+	if(n == 0 || v[n - 1] <= tmp) {
+		v.push_back(tmp);
+		return;
+	}
 
-        if(v[mid] == key) {
-            lb = mid;
-            R = mid - 1;
-        } else if(v[mid] > key) {
-            R = mid - 1;
-        } else if(v[mid] < key) {
-            L = mid + 1;
-        }
-    }
-
-    return lb;
+	int last = v[n - 1];
+	v.pop_back();
+	insert(v, tmp);
+	v.push_back(last);
 }
 
-int upperBound(vector<int>& v, int key) {
-    int n = v.size();
-    int L = 0, R = n - 1, mid = -1;
-    int ub = -1;
+void sort(vector<int>& v) {
+	int n = v.size();
 
-    while(L <= R) {
-        mid = L + (R - L) / 2;
+	// base condition
+	if(n == 1)
+		return;
 
-        if(v[mid] == key) {
-            ub = mid;
-            L = mid + 1;
-        } else if(v[mid] > key) {
-            R = mid - 1;
-        } else if(v[mid] < key) {
-            L = mid + 1;
-        }
-    }
+	// hypothesis
+	int last = v[n - 1];
+	v.pop_back();
+	sort(v);
 
-    return ub;
+	// indexation
+	insert(v, last);
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-    vector<int> v {2, 4, 10, 10, 10, 14, 20};
-    cout << lowerBound(v, 10) << endl;
-    cout << upperBound(v, 10) << endl;
-    cout << "occurence: " << upperBound(v, 10) - lowerBound(v, 10) + 1 << endl;
-    
-    return 0;
+	vector<int> v {5, 1, 0, 2};
+	sort(v);
+
+	for(auto& el: v)
+		cout << el << ' ';
+
+	
+	return 0;
 }
