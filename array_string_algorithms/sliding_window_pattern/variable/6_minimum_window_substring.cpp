@@ -14,43 +14,47 @@ all the letters of t must be present in substring (window) of s and in same quan
 find minimum window length of all those substrings 
 ======================================*/
 
-int minimumWindowSubstring(string s, string t) {
-	const int n = s.length();
-	int i = 0, j = 0;
-	int mn = numeric_limits<int>::max();
-
+string minWindowSubstring(string& s, string& t) {
 	unordered_map<char, int> mp;
+
 	for(auto& el: t)
 		mp[el]++;
+
 	int count = mp.size();
+	int i = 0, j = 0, n = s.length();
+	int start = -1, mn = INT_MAX;
 
 	while(j < n) {
-		if(mp.find(s[j]) != mp.end())
+		if(mp.find(s[j]) != mp.end()) {
 			mp[s[j]]--;
-
-		if(mp[s[i]] == 0) 
-			count--;
+			if(mp[s[j]] == 0)
+				count--;
+		}
 
 		if(count == 0) {
-			if(mp.find(s[i]) == mp.end()) {
-				++i;
-			} else {
-				while(mp[s[i]] <= 0) {
-					mp[s[i]]++;
-					if(mp[s[i]] > 0)
-						count++;
-					mn = min(mn, j - i + 1);
-					++i;
+			while(count == 0) {
+				if(j - i + 1 < mn) {
+					mn = j - i + 1;
+					start = i;
 				}
 
-				++j;
+				if(mp.find(s[i]) != mp.end()) {
+					mp[s[i]]++;
+					if(mp[s[i]] > 0) 
+						++count;
+				}
+
+				++i;
 			}
-		} else {
-			++j;
 		}
+
+		++j;
 	}
 
-	return mn;
+	if(start == -1)
+		return "";
+
+	return s.substr(start, mn);
 }
 
 int main() {
@@ -59,11 +63,23 @@ int main() {
 
 	string s = "timetopractice";
 	string t = "toc";
-	cout << minimumWindowSubstring(s, t) << '\n'; // 
+	cout << minWindowSubstring(s, t) << '\n'; // 
 
 	s = "TOTMTAPTAT";
 	t = "TTA";
-	cout << minimumWindowSubstring(s, t) << '\n';
+	cout << minWindowSubstring(s, t) << '\n';
+
+	s = "ADOBECODEBANC";
+	t = "ABC";
+	cout << minWindowSubstring(s, t) << endl;
+
+	s = "a";
+	t = "a";
+	cout << minWindowSubstring(s, t) << endl;
+
+	s = "a";
+	t = "aa";
+	cout << minWindowSubstring(s, t) << endl;
 
 
 	
