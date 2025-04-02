@@ -7,7 +7,7 @@ public:
 		/**
 		 * Solution is simple, but tricky to realize 
 		 * - if KEY is present in array => return K as |K - K| = 0 minimum
-		 * - [MY SOLUTION]else find Lower and Upper bound of Key and return min(|K-LB|, |K-UB|)
+		 * - [MY SOLUTION] else find Lower and Upper bound of Key and return min(|K-LB|, |K-UB|)
 		 * - [BETTER SOLUTION], At the end of BS loop, if we do not find our element then our L and R
 		 *   pointer will be pointing to our LB and UB, L => UB and R => LB
 		 */
