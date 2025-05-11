@@ -94,6 +94,43 @@ int countAnagram(string s, string pat) {
 	return anagramCount;
 }
 
+// simplest
+int countOccurrenceOfAnagram(string s, string t) {
+	unordered_map<char, int> mt, ms;
+	int count = 0;
+
+	// f => 1, o => 1, r => 1
+	for(auto& el: t)
+		mt[el]++;
+
+	int n = s.length();
+	int m = t.length();
+	int i = 0, j = 0;
+
+	// forxxorfxdofr
+	while(j < n) {
+		if(mt.find(s[j]) != mt.end()) 
+			ms[s[j]]++;
+
+		if(j - i + 1 == m) {
+			if(ms == mt)
+				count++;
+
+			if(ms.find(s[i]) != ms.end()) {
+				ms[s[i]]--;
+				if(ms[s[i]] == 0)
+					ms.erase(s[i]);
+			}
+
+			++i;
+		}
+
+		++j;
+	}
+
+	return count;
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);

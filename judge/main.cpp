@@ -1,45 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void insert(vector<int>& v, int tmp) {
-	int n = v.size();
+void place_element(vector<int>& v, int k, vector<bool>& visited, int element, int index) {
+	if(!visited[index]) {
+		visited[index] = true;
 
-	if(n == 0 || v[n - 1] <= tmp) {
-		v.push_back(tmp);
-		return;
+		int nextIndex = (index + k) % n;
+		int el = v[nextIndex];
+
+		v[nextIndex] = v[index];
+		place_element(v, k, nextIndex);
 	}
-
-	int last = v[n - 1];
-	v.pop_back();
-	insert(v, tmp);
-	v.push_back(last);
-}
-
-void sort(vector<int>& v) {
-	int n = v.size();
-
-	// base condition
-	if(n == 1)
-		return;
-
-	// hypothesis
-	int last = v[n - 1];
-	v.pop_back();
-	sort(v);
-
-	// indexation
-	insert(v, last);
 }
 
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 
-	vector<int> v {5, 1, 0, 2};
-	sort(v);
 
-	for(auto& el: v)
-		cout << el << ' ';
+	vector<int> v {1,2,3,4,5,6,7};
+				//{1,2,3,1,5,6,7};
+	int n = v.size();
+	vector<bool> visited(n, false);
+	place_element(v, 3, 0);
+	// 0, 3, 6, 2, 5, 1, 4, 0
+
+	// 1, 2, 3, 4, 5 | k = 3
+	// 5, 4, 3, 2, 1 
+	// 3, 4, 5, 2, 1
+	// 3, 4, 5, 1, 2 => 3, 4, 5, 1, 2
+
 
 	
 	return 0;
