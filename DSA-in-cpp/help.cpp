@@ -27,6 +27,19 @@ int getItemCount(vector<int>& v, int key) {
 	return distance(lb, ub);
 }
 
+void getMinMaxValues() {
+	vector<int> v {2, 5, 1, 4, 3};
+	int nums[] {2, 5, 3, 1, 4};
+	int n = 5;
+
+	cout << *max_element(v.begin(), v.end()) << endl;
+	cout << *min_element(v.begin(), v.end()) << endl;
+	cout << *max_element(nums, nums + n) << endl;
+	cout << *min_element(nums, nums + n) << endl;
+	cout << max({10, 20, 50}) << endl;
+	cout << min({10, 20, 50}) << endl;
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
@@ -45,7 +58,9 @@ int main() {
 
 	vector<int> v {2, 3, 10, 10, 10, 20, 30};
 	// cout << "occurrences: " 
-	 cout << getItemCount(v, 10) << endl;
+	cout << getItemCount(v, 10) << endl;
+
+	getMinMaxValues();
 	
 	return 0;
 }

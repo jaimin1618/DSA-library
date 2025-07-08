@@ -1,0 +1,32 @@
+Solving these 7 problem patterns will enable you to solve 70 DP problems. No doubt about it!
+
+1) 0-1 KnapSack
+	- Subset sum
+	- Equal sum partition
+	- Count subset sum
+	- Minimum subset sum different (Solid problem!)
+	- Count number of subset sum with given difference 
+	- Target sum (Tricky question!)
+
+2) Unbounded KnapSack
+	- Rod cutting
+	- Coin change
+		- # of ways coin change
+		- Minimum coins required coin change (Interesting! look into this for many twists!)
+	- Longest common subsequence
+	- Longest common substring
+	- Print LCS
+	- Shorted common supersequence
+	- Minimum number of insertion and deletion to convert string a to b
+	- Longest palindromic subsequence
+	- Minimum number of deletion in string to make it palindrome
+	- Print shortest common supersequence
+	- Longest repeating subsequence
+	- Sequence pattern matching
+	- Minimum number of insertion in a string to make it palindrome
+
+3) Matrix Chain Multiplication (Solid topic!)
+	- Palindrome paritioning 
+	- Evaluate expression to true boolean parenthesization
+	- Scrambled string
+	- Egg dropping problem

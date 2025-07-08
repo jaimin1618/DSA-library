@@ -52,6 +52,24 @@ bool isSubsetSum(int v[], int N, int T) {
 	return dp[N][T];
 }
 
+bool subsetSum(vector<int>& v, int sum, int n) {
+    if(sum == 0 && n == 0)
+        return true;
+    if(sum == 0)
+        return true;
+    if(n == 0)
+        return false;
+
+    if(v[n - 1] <= sum) {
+        bool include = subsetSum(v, sum - v[n - 1], n - 1);
+        bool exclude = subsetSum(v, sum, n - 1);
+        return include || exclude;
+    }
+
+    // exclude
+    return subsetSum(v, sum, n - 1);
+}
+
 int main() {
 	int v[]{1, 5, 3, 7, 4};
 	int sum = 12;

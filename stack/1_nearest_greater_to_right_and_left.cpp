@@ -106,5 +106,9 @@ int main() {
 		cout << el << ' ';
 	cout << '\n';
 
+	vector<int> t {7,1,5,3,6,4};
+	for(auto& el: nextLargerElement(t))
+	cout << el << " "; 
+
 	return 0;
 }

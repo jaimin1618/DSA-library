@@ -21,11 +21,26 @@ int longest_common_substring_length(string x, string y, int n, int m) {
 	return mx;
 }
 
+int longest_common_substring(string a, string b, int n, int m, int& ans) {
+	if(n == 0 || m == 0)
+		return 0;
+	if(a[n - 1] != b[m - 1])
+		return 0;
+
+	int tmp = 1 + longest_common_substring(a, b, n - 1, m - 1, ans);
+	ans = max(tmp, ans);
+	return tmp;
+}
+
 int main() {
 	string x = "abcde";
 	string y = "abfce";
 	cout << "Longest common substring: ";
 	cout << longest_common_substring_length(x, y, x.size(), y.size()) << '\n';
+
+	int ans = 0;
+	longest_common_substring(x, y, x.size(), y.size(), ans);
+	cout << ans << endl;
 
 
 	return 0;

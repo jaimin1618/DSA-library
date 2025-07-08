@@ -9,7 +9,7 @@ static void printv(const T v[], int n) {
 	cout << '\n';
 }
 
-int minimum_number_of_coins(int coin[], int n, int T) {
+int coinChangeMinimumCoinsRequired(int coin[], int n, int T) {
 	int dp[n + 1][T + 1];
 
 	// initialization
@@ -52,13 +52,20 @@ int minimum_number_of_coins(int coin[], int n, int T) {
 }
 
 
-
 int main() {
-	int coin[] {2, 1};
+	// Coin change - Minimum number of coins required for change
+	// Interesting problem, multiple twists and base conditions / initialization
+
+	// changes from parent problems - unbounded knapsack, subset sum and coin change
+	// - Initialization of i = 1 (2nd row)
+	// Initializaton of Infinity (∞) with INT_MAX - 1 due to +1 addition
+	// Adding +1 in "1 + dp[i][j - coin[i - 1]]" that highlights a coin is selected.
+
+	int coin[] {2, 1, 3};
 	int n = 3;
 	int T = 5; // ans: (2 + 3) = 5 => 2 coins minimum
 	cout << "Minimum coin required: ";
-	cout << minimum_number_of_coins(coin, n, T) << '\n';
+	cout << coinChangeMinimumCoinsRequired(coin, n, T) << '\n';
 
 	return 0;
 }

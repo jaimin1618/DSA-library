@@ -42,6 +42,10 @@ int minimumSubsetSumDiff(int v[], int n) {
 }
 
 int main() {
+	// Solid DP question. 
+	// Explains DP in detailed, what does mean dp[][] matrix and everything. 
+	// Solid observations
+
 	int v[]{1, 6, 11, 5};
 	int n = 4;
 	cout << "Result: " << minimumSubsetSumDiff(v, n) << '\n';

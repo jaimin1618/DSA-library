@@ -3,16 +3,16 @@ using namespace std;
 // NOTE: this is unbounded KnapSack
 
 int dp[100 + 1][100 + 1];
-int coin_change_Memo(int coin[], int n, int T) {
+int coinChangeMemoized(int coin[], int n, int T) {
 	if(T == 0) return dp[n][T] = 1;
 	if(n == 0) return dp[n][T] = 0;
 	if(dp[n][T] != -1) return dp[n][T];
 
 	if(coin[n - 1] <= T) 
-		return dp[n][T] = coin_change_Memo(coin, n, T - coin[n - 1]) 
-		+ coin_change_Memo(coin, n - 1, T);
+		return dp[n][T] = coinChangeMemoized(coin, n, T - coin[n - 1]) 
+		+ coinChangeMemoized(coin, n - 1, T);
 
-	return coin_change_Memo(coin, n - 1, T);
+	return coinChangeMemoized(coin, n - 1, T);
 }
 
 
@@ -27,7 +27,7 @@ int coin_change(int coin[], int n, int T) {
 	return coin_change(coin, n - 1, T);
 }
 
-int coinChainMaximumWays(int coin[], int n, int T) {
+int coinChangeNumberOfWays(int coin[], int n, int T) {
 	int& W = T;
 	int dp[n + 1][W + 1];
 
@@ -38,8 +38,7 @@ int coinChainMaximumWays(int coin[], int n, int T) {
 			if(i == 0 || j == 0) continue;
 
 			if(coin[i - 1] <= j) 
-				dp[i][j] = dp[i - 1][j] 
-				+ dp[i][j - coin[i - 1]];
+				dp[i][j] = dp[i - 1][j] + dp[i][j - coin[i - 1]];
 			else 
 				dp[i][j] = dp[i - 1][j];
 		}
@@ -54,9 +53,9 @@ int main() {
 	int sum = 5; // find ways to get 5 using coins[]
 	memset(dp, -1, sizeof(dp));
 
-	cout << "Maximum possible ways: " << coinChainMaximumWays(coin, n, sum) << '\n';
+	cout << "Maximum possible ways: " << coinChangeNumberOfWays(coin, n, sum) << '\n';
 	cout << "Maximum possible ways: " << coin_change(coin, n, sum) << '\n';
-	cout << "Maximum possible ways: " << coin_change_Memo(coin, n, sum) << '\n';
+	cout << "Maximum possible ways: " << coinChangeMemoized(coin, n, sum) << '\n';
 
 
 	return 0;
