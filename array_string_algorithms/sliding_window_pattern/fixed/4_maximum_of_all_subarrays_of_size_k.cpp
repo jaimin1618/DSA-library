@@ -41,6 +41,9 @@ int main() {
 	vector<int> ip {1, 3, -1, -3, 5, 3, 6, 7};
 	int k = 3;
 
+	ip.assign({1,3,1,2,0,5});
+	k = 3;
+
 	for(auto& el: maximumOfAllSubarray(ip, k))
 		cout << el << ' ';
 

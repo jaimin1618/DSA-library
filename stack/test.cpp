@@ -5,8 +5,14 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vector<int> v {1, 2, 3};
-    cout << *max_element(v) << endl;
+    priority_queue<int> maxH;
+
+    maxH.push(1);
+    maxH.push(2);
+    maxH.push(3);
+    cout << maxH.top() << endl;
+    maxH.pop();
+    cout << maxH.top() << endl;
 
     return 0;
 }

@@ -59,6 +59,50 @@ vector<int> stockSpanOptimized(vector<int>& v) {
 	return res;
 }
 
+// Refer: https://leetcode.com/problems/online-stock-span/
+// Good problem to solve for this topic & category
+class StockSpanner {
+    stack<pair<int, int>> s;
+    vector<int> v;
+    vector<int> ans;
+    vector<int> result;
+
+public:
+    StockSpanner() {}
+
+    int next(int price) {
+        v.push_back(price);
+        int i = v.size() - 1; // to current index & size
+
+        if (s.empty()) {
+            ans.push_back(-1);
+            result.push_back(i - (-1));
+        } else if (!s.empty() && s.top().first > price) {
+            ans.push_back(s.top().second);
+            result.push_back(i - s.top().second);
+        } else if (!s.empty() && s.top().first <= price) {
+            while (!s.empty() && s.top().first <= price)
+                s.pop();
+            if (s.empty()) {
+                ans.push_back(-1);
+                result.push_back(i - (-1));
+            } else {
+                ans.push_back(s.top().second);
+                result.push_back(i - s.top().second);
+            }
+        }
+        s.push({price, i});
+
+        return result.back();
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
