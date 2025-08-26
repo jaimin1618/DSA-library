@@ -19,7 +19,7 @@ int MCMMemoized(int v[], int i, int j) {
 	if(dp[i][j] != -1) 
 		return dp[i][j];
 	
-	if(i >= j)
+	if(i >= j) 
 		return dp[i][j] = 0;
 
 	int mini = INT_MAX;
@@ -32,7 +32,7 @@ int MCMMemoized(int v[], int i, int j) {
 }
 
 int main() {
-	int v[] {40, 20, 30, 10, 30};
+	int v[] {40,20, 30, 10, 30};
 	int n = sizeof(v) / sizeof(int);
 	int i = 1, j = n - 1;
 	cout << MCM(v, i, j) << '\n';

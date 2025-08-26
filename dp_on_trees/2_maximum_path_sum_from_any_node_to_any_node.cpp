@@ -1,12 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
-public:
+struct Node {
 	Node* left;
 	Node* right;
 	int value;
-}
+};
 
 int maxPathSum(Node *root, int result) {
 	if(root == nullptr)

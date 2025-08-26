@@ -26,7 +26,6 @@ public:
 };
 
 // FAST MODULAR EXPONENTIAL function - function to calculate X^Y % MOD
-int 
 
 int main() {
 	ios_base::sync_with_stdio(false);
