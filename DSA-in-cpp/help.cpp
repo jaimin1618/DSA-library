@@ -40,6 +40,45 @@ void getMinMaxValues() {
 	cout << min({10, 20, 50}) << endl;
 }
 
+void printDoubleWithKPrecision() {
+	// let's say your answer is double ans = 0.3;
+	// but problem statement added to print answer till 9 decimal points
+	// we use fixed and setprecision(9) for that. 
+	double ans = 0.3;
+	cout << fixed << setprecision(9);
+	cout << ans << endl;
+
+
+    // Print double with fixed precision (e.g., 9 decimal places)
+    cout << fixed << setprecision(9) << ans << endl; // Output: 0.300000000
+
+    // Align text using setw, left/right alignment
+    cout << setw(10) << left << "Name" << setw(10) << right << 123 << endl;
+
+    // Fill empty spaces with custom character
+    cout << setfill('-') << setw(15) << "Test" << endl;
+
+    string s = "123";
+
+	// Convert string → integer
+	int num = stoi(s);
+
+	// Convert integer → string
+	string s2 = to_string(num);
+
+	// Convert to uppercase
+	string str = "hello";
+	transform(str.begin(), str.end(), str.begin(), ::toupper); // "HELLO"
+	cout << str << endl;
+
+	// Remove all spaces from string
+	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+	cout << str << endl;
+
+	cout << __gcd(12, 18) << endl;  // Greatest Common Divisor → 6
+	
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
@@ -61,6 +100,8 @@ int main() {
 	cout << getItemCount(v, 10) << endl;
 
 	getMinMaxValues();
+
+	printDoubleWithKPrecision();
 	
 	return 0;
 }
