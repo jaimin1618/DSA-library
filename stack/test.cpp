@@ -1,40 +1,53 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<vector<bool>> getPalTable(string& s) {
-    int n = s.length();
-    vector<vector<bool>> isPal(n, vector<bool>(n, false));
+void bfs(vector<vector<int>>& g) {
+    int nodes = g.size();
+    vector<int> visited (nodes);
+    queue<int> q;
 
-    // Step 1: Precompute palindrome table
-    for (int len = 1; len <= n; ++len) {
-        for (int i = 0; i + len - 1 < n; ++i) {
-            int j = i + len - 1;
-            if (s[i] == s[j]) {
-                if (len <= 2) isPal[i][j] = true;
-                else isPal[i][j] = isPal[i+1][j-1];
+    q.push(0);
+    visited[0] = 1;
+
+    while(!q.empty()) {
+        int f = q.front();
+        q.pop();
+
+        // process
+        cout << f << " ";
+        // visited[f] = 1;
+
+        for(int& nbr: g[f]) {
+            if(!visited[nbr]) {
+                // V this - visited[nbr] = 1 MUST be here and not when we process.
+                visited[nbr] = 1;
+                q.push(nbr);
             }
         }
     }
-
-    return isPal;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s = "aabbaac";
-    vector<vector<bool>> dp = getPalTable(s);
-    int n = s.length();
+    // graph - 1 
+    //    0
+    //   / \
+    //  /   \
+    // 1 --- 2
+    vector<vector<int>> edges = {
+        {0, 1}, {0, 2}, {1, 2}
+    };
+    int nodes = 3;
 
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < n; ++j) {
-            if(dp[i][j]) {
-                cout << s.substr(i, j - i + 1) << endl;
-            }
-        }
+    vector<vector<int>> g (3, vector<int>());
+    for(auto& edge: edges) {
+        g[edge[0]].push_back(edge[1]);
+        g[edge[1]].push_back(edge[0]);
     }
 
+    bfs(g);
 
     return 0;
 }

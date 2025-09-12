@@ -28,12 +28,13 @@ void bfs(unordered_map<int, vector<int>>& graph) {
 
 		// process current node
 		cout << f << " ";
+		visited[f] = true;
+
 		q.pop();
 
 		// push neighboring nodes if not processed
 		for(int& nbr: graph[f]) {
 			if(!visited[nbr]) {
-				visited[nbr] = true;
 				q.push(nbr);
 			}
 		}
@@ -102,6 +103,9 @@ int main() {
 	}
 
 	print_graph(graph);
+	cout << "BFS traversal: ";
+	bfs(graph);
+	cout << "\n\n";
 
 	return 0;
 }

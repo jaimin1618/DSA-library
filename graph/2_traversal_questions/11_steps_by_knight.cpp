@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Pattern: Level wise BFS traversal
 
 // BFS - regular traversal
 void bfs(vector<vector<int>>& graph) {

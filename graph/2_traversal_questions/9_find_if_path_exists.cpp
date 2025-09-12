@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// Pattern: Simple DFS / BFS traversal
 
 void dfs(vector<vector<int>>& graph, vector<bool>& visited, int source) {
 	visited[source] = true;
