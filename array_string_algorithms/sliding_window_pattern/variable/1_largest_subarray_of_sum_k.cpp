@@ -19,6 +19,14 @@ int solve(vector<int>& v, int target) {
 		// 1,2,3, 4, 5 | k = 7
 		// 1,3,6,10,15
 
+		// lets say you want to consider answer 3+4=7
+		// how will Map get updated! 
+		// at 1 | 1 => 0
+		// at 1, 2 | 3 => 1 
+		// at 1, 2, 3 | => 6 => 2 
+  // Now at 1, 2, 3, 4 we will look for sum-target=10-7=3
+  // we will find 3 prefix sum at index=2
+
 		int remain = sum - target;
 		if(mp.find(remain) != mp.end()) {
 			int len = i - mp[remain];
