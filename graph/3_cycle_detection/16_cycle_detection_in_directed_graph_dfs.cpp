@@ -20,7 +20,7 @@ void dfs(int source, vector<vector<int>>& g, vector<int>& visited, vector<int>& 
 		}
 	}
 
-	current_path[source] = 0; // backtrack 
+	current_path[source] = -1; // backtrack 
 }
 
 bool cycle_in_directed_graph_dfs(int nodes, vector<vector<int>>& edges) {

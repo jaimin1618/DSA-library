@@ -51,6 +51,37 @@ bool cycle_exists_bfs(int nodes, vector<vector<int>>& edges) {
 	return loop;
 }
 
+// Another way to detect cycle using queue<pair<int, int>> q
+bool detect(int src, vector<int> adj[], int vis[]) {
+  vis[src] = 1; 
+  // store <source node, parent node>
+  queue<pair<int,int>> q; 
+  q.push({src, -1}); 
+  // traverse until queue is not empty
+  
+  while(!q.empty()) {
+      int node = q.front().first; 
+      int parent = q.front().second; 
+      q.pop(); 
+      
+      // go to all adjacent nodes
+      for(auto adjacentNode: adj[node]) {
+          // if adjacent node is unvisited
+          if(!vis[adjacentNode]) {
+              vis[adjacentNode] = 1; 
+              q.push({adjacentNode, node}); 
+          }
+          // if adjacent node is visited and is not it's own parent node
+          else if(parent != adjacentNode) {
+              // yes it is a cycle
+              return true; 
+          }
+      }
+  }
+  // there's no cycle
+  return false; 
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
