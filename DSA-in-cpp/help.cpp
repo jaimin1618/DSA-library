@@ -7,6 +7,10 @@ int stringToNumber(string s) {
 }
 
 double stringToNumberImproved(string s) {
+ // consider ss as std::cin to easily understand.
+ // to get streaming number you first need to read it.
+ // cin >> num;
+ // just like that ss >> num; data is read. 
 	stringstream ss(s);
 	double num;
 	ss >> num;
