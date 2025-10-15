@@ -32,6 +32,7 @@ void frequencySort(vector<int>& v) {
 	}
 
 	vector<int> sol;
+	
 	while(!maxH.empty()) {
 		const pi& p = maxH.top();
 		int frequency = p.first;

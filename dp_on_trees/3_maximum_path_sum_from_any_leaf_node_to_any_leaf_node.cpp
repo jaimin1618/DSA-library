@@ -15,10 +15,12 @@ int solve(Node* root, int result) {
 	int l = solve(root->left, result);
 	int r = solve(root->right, result);
 
-	int temp = root->v + max(l, r);
+	int temp = root->v + max(l, r); // I have to considering any of left/right entire subtree 
+
 	if(root->left == nullptr && root->right == nullptr)
 		temp = max(temp, root->v);
 	int ans = max(temp, l + r + root->v);
+
 	result = max(result, ans);
 
 	return temp;

@@ -45,7 +45,7 @@ int getMin(vector<int>& v) {
 			R = mid - 1;
 	}
 
-	// note: return 0 doesn't handle edge case
+	// note: return 0 doesn't handle edge case - !doubtful, will review later. 
 	return min(v[0], v[n - 1]);
 }
 

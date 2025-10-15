@@ -7,7 +7,7 @@ using namespace std;
  */
 
 void sortKSortedArray(vector<int>& v, int k) {
-	priority_queue<int,vector<int>,greater<int>> minHeap;
+	priority_queue<int, vector<int>, greater<int>> minHeap;
 	vector<int> sorted_v;
 
 	for(int i = 0; i < v.size(); ++i) {

@@ -6,6 +6,7 @@ bool is_valid(vector<int>& v, int k, int maxPages) {
 	int sum = 0;
 	int n = v.size();
 
+	// 10, 20, 30, 40
 	for(int i = 0; i < n; ++i) {
 		sum += v[i];
 		if(sum > maxPages) {
@@ -27,7 +28,7 @@ int allocateBooks(vector<int>& v, int k) {
 	if(n < k)
 		return -1; // not possible to distribute 
 	/**
-	 * Maximum number of book student can read
+	 * Maximum number of book pages student can read
 	 * 
 	 * |0-----40--------100|
 	 * 		   ^	^	 ^
@@ -40,8 +41,10 @@ int allocateBooks(vector<int>& v, int k) {
 
 	while(L <= R) {
 		int mid = L + (R - L) / 2; // let's take mid as max pages a student can read
+		cout << "mid: " << mid << endl;
 
 		if(is_valid(v, k, mid) == true) {
+			cout << "candidate: " << mid << endl;
 			result = mid; // this scheme is possible solution
 			R = mid - 1;
 		} else {
@@ -57,9 +60,9 @@ int main() {
 	cin.tie(nullptr);
 
 	vector<int> v {10, 20, 30, 40};
-	int k = 2;
+	int k = 3;
 
-	cout << allocateBooks(v, k) << '\n';
+	cout << allocateBooks(v, k) << '\n'; // 40 
 
 
 

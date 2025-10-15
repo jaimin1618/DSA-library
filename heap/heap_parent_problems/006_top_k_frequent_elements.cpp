@@ -33,6 +33,7 @@ vector<int> KMostFrequentNumbers(vector<int>& v, int k) {
 	for(auto& el: mp) {
 		pi p = make_pair(el.second, el.first);
 		minH.push(p);
+		
 		if(minH.size() > k) {
 			minH.pop();
 		}

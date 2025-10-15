@@ -19,38 +19,71 @@ public:
 	}
 };
 
-using dist_point_pair = pair<int, Point>; // distance-Point, of course KEY is distance
+// vector<Point> KClosestPoints(const vector<Point>& points, int k) {
+// 	using distancePointPair = pair<int, Point>; // distance-Point, of course KEY is distance
+// 	// priority_queue<pair<int, Point>> x;
 
-vector<Point> KClosestPoints(const vector<Point>& points, int k) {
-	priority_queue<dist_point_pair> maxH;
+// 	priority_queue<distancePointPair, vector<distancePointPair>, less<distancePointPair>> x;
 
-	for(const Point& point: points) {
-		int dis = point.get_x() * point.get_x() + point.get_y() * point.get_y();
-		pair<int, Point> p = make_pair<int,Point>(dis, point);
-		maxH.push(p);
-		if(maxH.size() > k) {
+// 	// for(const Point& point: points) {
+// 	// 	int dis = point.get_x() * point.get_x() + point.get_y() * point.get_y();
+// 	// 	pair<int, Point> p = make_pair(dis, point);
+// 	// 	maxH.push(p);
+// 	// 	if(maxH.size() > k) {
+// 	// 		maxH.pop();
+// 	// 	}
+// 	// }
+
+// 	vector<Point> sol;
+// 	// while(!maxH.empty()) {
+// 	// 	auto p = maxH.top();
+// 	// 	Point point = p.second;
+// 	// 	sol.push_back(point);
+// 	// }
+
+// 	return sol;
+// }
+
+vector<vector<int>> k_closest_points(vector<vector<int>> points, int k) {
+	priority_queue<pair<int, pair<int, int>>> maxH;
+
+	for(auto& el: points) {
+		int x = el[0], y = el[1];
+		int d = x * x + y * y;
+
+		pair<int, pair<int, int>> item = {d, {x, y}};
+		maxH.push(item);
+
+		if(maxH.size() > k)
 			maxH.pop();
-		}
 	}
 
-	vector<Point> sol;
+	vector<vector<int>> ans;
+
 	while(!maxH.empty()) {
-		auto p = maxH.top();
-		Point point = p.second;
-		sol.push_back(point);
+		pair<int, int> xy = maxH.top().second;
+		// cout << xy.first << " " << xy.second << endl;
+		ans.push_back({xy.first, xy.second});
+		maxH.pop();
 	}
 
-	return sol;
+	return ans;
 }
 
 int main() {
-	vector<Point> points = {
+	vector<vector<int>> points = {
 		{1, 2},
 		{-2, 2},
 		{5, 8},
 		{0, 1}
 	};
 	int k = 2;
+	vector<vector<int>> ans = k_closest_points(points, k);
+
+	for(auto& el: ans) {
+		cout << el[0] << ", " << el[1] << endl;
+	}
+
 
 
 	return 0;

@@ -28,10 +28,10 @@ int findMaxFromBitonicArray(vector<int>& v) {
 				return v[mid + 1];
 			}
 		} else if(mid == n - 1) {
-			if(v[n - 1] > v[n - 2]) {
-				return v[n - 1];
+			if(v[mid] > v[mid - 1]) {
+				return v[mid];
 			} else {
-				return v[n - 2];
+				return v[mid - 1];
 			}
 		}
 	}

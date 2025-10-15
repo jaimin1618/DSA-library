@@ -29,7 +29,7 @@ ListNode *getMiddleNode(ListNode *root) {
 	slow = root;
 
 	// fast != NULL is same as fast
-	while(fast && fast->next) {
+	while(fast && fast->next) { // till we reach last element (and not the nullptr)
 		fast = fast->next->next;
 		slow = slow->next;
 	}

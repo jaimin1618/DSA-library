@@ -58,7 +58,9 @@ vector<int> k_closest_numbers(vector<int>& v, int X, int k) {
 }
 
 vector<int> kFarthestNumbers(vector<int>& v, int X, int k = 3) {
-	// I want to keep numbers with more different & pop() closest numbers -> we require minH
+	// I want to keep numbers with more different on top so that we can pop() them
+	// and keep closest numbers hence -> we require minH
+
 	using pi = pair<int, int>;
 	priority_queue<pi, vector<pi>, greater<pi>> minH;
 
@@ -76,8 +78,8 @@ vector<int> kFarthestNumbers(vector<int>& v, int X, int k = 3) {
 	}
 
 	vector<int> result;
+	
 	while(!minH.empty()) {
-
 		result.push_back(minH.top().second);
 		minH.pop();
 	}

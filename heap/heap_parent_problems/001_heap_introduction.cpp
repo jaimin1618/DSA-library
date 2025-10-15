@@ -13,8 +13,10 @@ using namespace std;
  * if K + Smallest => MaxH
  * if K + Largest => MinH
  * 
- * minH means Smaller elements (min elements) on Top of Stack
- * maxH means Larger elements (max elements) on Top of Stack
+ * minH means larger or bigger elements (max elements) on Top of Stack
+ * maxH means smaller elements (min elements) on Top of Stack
+ * 
+ * priority_queue<int> maxH, is default
  * 
  * using Heap we transfer nlogn => nlogk complexity
  */

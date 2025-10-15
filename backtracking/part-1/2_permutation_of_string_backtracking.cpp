@@ -9,8 +9,9 @@ void solve(string& s, int start, vector<string>& res) {
 
 	set<char> swapped;
 
-	for(int i = start; i < s.length(); ++i) {
-		if(swapped.find(s[i]) == swapped.end()) {
+	for(int i = start + 1; i < s.length(); ++i) {
+		if(swapped.find(i) == swapped.end()) {
+			swapped.insert(i);
 			swap(s[i], s[start]);
 			solve(s, i + 1, res);
 			swap(s[i], s[start]);
@@ -20,10 +21,8 @@ void solve(string& s, int start, vector<string>& res) {
 
 vector<string> find_permutation(string ip) {
 	vector<string> v;
-
 	int start = 0;
 	solve(ip, start, v);
-
 	return v;
 }
 
