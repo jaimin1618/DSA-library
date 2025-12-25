@@ -14,7 +14,9 @@ bool dfs(int& source, int& parent, vector<vector<int>>& g, vector<int>& visited)
 
 	for(int& nbr: g[source]) {
 		if(!visited[nbr]) {
-			return dfs(nbr, source, g, visited);
+			bool loopFound = dfs(nbr, source, g, visited);
+			if(loopFound)
+				return true;
 		} else {
 			// condition to be added for checking loop - if node is visited & it's not parent node
 			if(nbr != parent) {

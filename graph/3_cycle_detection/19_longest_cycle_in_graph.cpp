@@ -1,38 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void dfs(int source, vector<vector<int>>& g, vector<int>& visited, vector<int>& current_path, int& mark, int& ans) {
-	cout << source << " ";
+// IMPORTANT POINT: 
+// Current path != cycle length
+// that's important to notice in this question. 
+
+// global variable to save answer
+int longestCycleLen = 0;
+
+bool dfs(int tag, int source, vector<int>& visited, vector<int>& currentPath, vector<vector<int>>& g) {
+	tag++;
 	visited[source] = 1;
-	current_path[source] = mark;
-	mark++;
+	currentPath[source] = tag; // tag current node
 
 	for(auto& nbr: g[source]) {
 		if(!visited[nbr]) {
-			dfs(nbr, g, visited, current_path);
+			bool cycle = dfs(tag, nbr, visited, currentPath, g);
+			if(cycle)
+				return true;
 		} else {
-
+			if(currentPath[nbr] != 0) {
+				int currentCycleLen = currentPath[source] - currentPath[nbr] + 1;
+				longestCycleLen = max(longestCycleLen, currentCycleLen);
+				return true;
+			}
 		}
 	}
 
-	current_path[]
+	return false;
 }
 
 int longest_cycle(int V, vector<vector<int>>& graph) {
-	vector<int> visited (V, 0); 
-	set<int> current_path;
-	// keep track of 0 -> 3 (0 is in current path & 3 is it's 3rd node in path)
-
-	int ans = 0;
-	int mark = 1;
+	vector<int> visited (V, 0), currentPath (V, 0);
 
 	for(int i = 0; i < V; ++i) {
 		if(!visited[i]) {
-			dfs(i, g, visited, current_path, mark, ans);
+			int sourceNode = i;
+			dfs(0, sourceNode, visited, currentPath, graph);
 		}
 	}
 
-	return ans;
+	return longestCycleLen;
 }
 
 int main() {
