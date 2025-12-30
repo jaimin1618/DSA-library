@@ -23,13 +23,20 @@ vector<int> bellmanFord(int V, vector<vector<int>>& edgeList, int src) {
 	// relax each edge V - 1 times
 	for(int i = 1; i <= V - 1; ++i) {
 		for(auto& edge: edgeList) {
-
 			// this is entire algorithm
 			int u = edge[0], v = edge[1], wt = edge[2];
 			if(dist[u] + wt < dist[v]) {
 				dist[v] = dist[u] + wt;
 			}
+		}
+	}
 
+	// checking for negative weight cycle - run relaxation for Vth time. 
+	for(auto& edge: edgeList) {
+		int u = edge[0], v = edge[1], wt = edge[2];
+		if(dist[u] != INT_MAX && dist[u] + wt < dist[v]) {
+			// if it is still possible to relax any edge
+			return {}; // cannot find shortest path - negative weight cycle exists 
 		}
 	}
 

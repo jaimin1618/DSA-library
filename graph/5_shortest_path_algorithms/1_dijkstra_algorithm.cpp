@@ -12,51 +12,48 @@ using namespace std;
 // Just replace your BFS queue with priority queue. 
 // And visited logic with dist + wt < dist[nbr] logic that's it. 
 
-class Solution {
-public:
-    // Function to implement Dijkstra's Algorithm
-    vector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int src) {
-        // Distance array initialized to large value
-        vector<int> dist(V, 1e9);
+// Function to implement Dijkstra's Algorithm
+vector<int> dijkstra(int V, vector<vector<pair<int,int>>>& adj, int src) {
+    // Distance array initialized to large value
+    vector<int> dist(V, 1e9);
 
-        // Min-heap storing {distance, node}
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    // Min-heap storing {distance, node}
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
 
-        // Distance to source is 0
-        dist[src] = 0;
+    // Distance to source is 0
+    dist[src] = 0;
 
-        // Push source into heap
-        pq.push({0, src});
+    // Push source into heap
+    pq.push({0, src});
 
-        // Process nodes until heap is empty
-        while (!pq.empty()) {
-            // Extract node with minimum distance
-            int d = pq.top().first;
-            int node = pq.top().second;
-            pq.pop();
+    // Process nodes until heap is empty
+    while (!pq.empty()) {
+        // Extract node with minimum distance
+        int d = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
 
-            // Skip if this distance is outdated
-            if (d > dist[node]) continue;
+        // Skip if this distance is outdated
+        if (d > dist[node]) continue;
 
-            // Traverse all adjacent neighbors
-            for (auto it: adj[node]) {
-                int next = it.first;
-                int wt = it.second;
+        // Traverse all adjacent neighbors
+        for (auto it: adj[node]) {
+            int next = it.first;
+            int wt = it.second;
 
-                // Relaxation check
-                if (dist[node] + wt < dist[next]) {
-                    // Update distance
-                    dist[next] = dist[node] + wt;
+            // Relaxation check
+            if (dist[node] + wt < dist[next]) {
+                // Update distance
+                dist[next] = dist[node] + wt;
 
-                    // Push updated distance into heap
-                    pq.push({dist[next], next});
-                }
+                // Push updated distance into heap
+                pq.push({dist[next], next});
             }
         }
-        
-        return dist;
     }
-};
+    
+    return dist;
+}
 
 int main() {
     // Number of vertices
@@ -74,8 +71,7 @@ int main() {
     adj[3].push_back({4, 2});
 
     // Run algorithm
-    Solution obj;
-    vector<int> dist = obj.dijkstra(V, adj, 0);
+    vector<int> dist = dijkstra(V, adj, 0);
 
     // Print shortest distances
     for (int i = 0; i < V; i++) {
