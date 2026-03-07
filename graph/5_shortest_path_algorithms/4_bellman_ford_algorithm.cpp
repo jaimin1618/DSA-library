@@ -25,7 +25,7 @@ vector<int> bellmanFord(int V, vector<vector<int>>& edgeList, int src) {
 		for(auto& edge: edgeList) {
 			// this is entire algorithm
 			int u = edge[0], v = edge[1], wt = edge[2];
-			if(dist[u] + wt < dist[v]) {
+			if(dist[u] != INT_MAX && dist[u] + wt < dist[v]) {
 				dist[v] = dist[u] + wt;
 			}
 		}

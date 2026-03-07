@@ -6,7 +6,7 @@ int main() {
 	cin.tie(nullptr);
 
 	vector<int> t {4, 5, 5, 5, 7, 8, 9};
-    cout << lower_bound(t.begin(), t.end(), 5) - t.begin() << endl; // checks for item (position) >= 5
+    cout << lower_bound(t.begin(), t.end(), 5) - t.begin() << endl; // checks for item (position) <= 5
     cout << upper_bound(t.begin(), t.end(), 5) - t.begin() << endl; // checks for > 5
 
     // Detailed confirmation and explanation on how lower_bound and upper_bound works.
@@ -20,10 +20,12 @@ int main() {
     // → Effectively: first index where value > x.
 
     // UTILITIES of lower bound and upper bound - 
-    int firstPos = lower_bound(t.begin(), t.end(), 5) - t.begin();
+    int firstPos = lower_bound(t.begin(), t.end(), 6) - t.begin();
+    cout << firstPos << endl;
     // first index where value >= 5
 
-    int afterLast = upper_bound(t.begin(), t.end(), 5) - t.begin();
+    int afterLast = upper_bound(t.begin(), t.end(), 6) - t.begin();
+    cout << afterLast << endl;
 	// first index where value > 5
 
 	int L = lower_bound(t.begin(), t.end(), 5) - t.begin();
@@ -32,9 +34,9 @@ int main() {
 
 	// Get full range of item
 	auto range = equal_range(t.begin(), t.end(), 5);
-	int L = range.first  - t.begin();  // first index of >= 5
-	int R = range.second - t.begin();  // first index of > 5
-	int count = R - L;
+	L = range.first  - t.begin();  // first index of >= 5
+	R = range.second - t.begin();  // first index of > 5
+	count = R - L;
 
 	return 0;
 }

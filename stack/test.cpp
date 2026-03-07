@@ -1,13 +1,19 @@
-#include<bits/stdc++.h>
-using namespace std;
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        return solve(grid, n, m);
+    }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    vector<int> t {4, 5, 5, 5, 7, 8, 9};
-    cout << lower_bound(t.begin(), t.end(), 5) - t.begin() << endl; // checks for <= 5
-    cout << upper_bound(t.begin(), t.end(), 5) - t.begin() << endl; // checks for > 5
-
-    return 0;
-}
+    int solve(vector<vector<int>>& grid, int n, int m) {
+        if(n = 1 && m == 1)
+            return grid[n - 1][m - 1];
+        if(n == 0 || m == 0)
+            return INT_MAX - 201;
+        
+        int moveUp = grid[n - 1][m - 1] + solve(grid, n - 1, m);
+        int moveLeft = grid[n - 1][m - 1] + solve(grid, n, m - 1);
+        return min(moveUp, moveLeft);
+    }
+};
