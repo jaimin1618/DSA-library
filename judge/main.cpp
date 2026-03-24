@@ -6,5 +6,8 @@ int main() {
     cin.tie(nullptr);
     
 
+    string s = "jaimin";
+    cout << s.front() << endl;
+
     return 0;
 }
