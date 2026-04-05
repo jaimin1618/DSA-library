@@ -83,6 +83,19 @@ void printDoubleWithKPrecision() {
 	
 }
 
+vector<string> string_split(string str, char delimiter) { 
+	vector<string> tokens;
+    stringstream ss(str); // Create a stringstream from the input string
+    string token;
+
+    // Use getline to extract tokens until the delimiter is found
+    while (getline(ss, token, delimiter)) {
+        tokens.push_back(token);
+    }
+
+    return tokens;
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
@@ -106,6 +119,10 @@ int main() {
 	getMinMaxValues();
 
 	printDoubleWithKPrecision();
+
+	vector<string> result = string_split("BMW,LEMBORGHINI,PORCHE", ',');
+	for(auto& item: result)
+		cout << item << " ";
 	
 	return 0;
 }
