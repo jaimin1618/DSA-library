@@ -96,6 +96,56 @@ vector<string> string_split(string str, char delimiter) {
     return tokens;
 }
 
+// WRITING CUSTOM LOGIC for priority_queue compare - 
+// https://leetcode.com/problems/top-k-frequent-words/
+class Solution {
+public:
+	// should behave like regular greater<int> for p.first
+	// but should behave like less<string> for .second
+    struct Compare {
+        bool operator()(auto& a, auto& b) const {
+            if (a.first != b.first)
+                return a.first > b.first; // min heap on first
+
+            return a.second < b.second; // tie-break on second
+        }
+    };
+
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        map<string, int> fq;
+
+        for (auto& word : words)
+            fq[word]++;
+
+        // i -> 2
+        // love -> 2
+
+        // day -> 1
+        // sunny -> 2
+        // is -> 3
+        // the -> 4
+
+        using pis = pair<int, string>;
+        priority_queue<pis, vector<pis>, Compare> minH; 
+
+        for (auto& item : fq) {
+            minH.push({item.second, item.first});
+            if (minH.size() > k)
+                minH.pop();
+        }
+
+        vector<string> result;
+
+        while (!minH.empty()) {
+            result.push_back(minH.top().second);
+            minH.pop();
+        }
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
